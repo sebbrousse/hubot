@@ -1,0 +1,23 @@
+FROM scaleway/nodejs:latest
+MAINTAINER seb.brousse@gmail.com
+
+ENV BOTDIR /opt/bot
+
+ONBUILD ADD . ${BOTDIR}
+
+ONBUILD RUN npm install
+
+WORKDIR ${BOTDIR}
+
+ENV HUBOT_PORT 8080
+ENV HUBOT_ADAPTER slack
+ENV HUBOT_NAME bot-name
+ENV HUBOT_GOOGLE_API_KEY xxxxxxxxxxxxxxxxxxxxxx
+ENV HUBOT_SLACK_TOKEN xxxxxxxxxxxxxxxxxxxxx
+ENV HUBOT_SLACK_TEAM team-name
+ENV HUBOT_SLACK_BOTNAME ${HUBOT_NAME}
+ENV PORT ${HUBOT_PORT}
+
+EXPOSE ${HUBOT_PORT}
+
+CMD bin/hubot
